@@ -1,0 +1,21 @@
+.get-all .table{
+   margin: auto 0;
+   padding-left: 100px;
+   padding-right: auto;
+   text-align: center;
+    
+   border: 1px solid black;
+   overflow-y: scroll;
+}
+
+  .create-main {
+    font-size: medium;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+.get-all th td {
+  border: 1px solid black;
+}
