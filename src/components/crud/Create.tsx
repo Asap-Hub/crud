@@ -40,11 +40,12 @@ export default function Create({setRefresh}:props){
 
       {showCreateModal && <Modal 
       title={ModalTitle}
+      buttonTitle='Create'
       firstName={(firstName)=>{setFirstName(firstName)}}
       secondName={(secondName) => {setSecondName(secondName)}}
       age={(age) =>{setAge(age)}}
       active={(active) => setActive(active)}
-      handleCreate={() => handleCreate()}
+      handleClick={() => handleCreate()}
       ></Modal>}
 
        <button type="button" onClick={handleModal}>Create</button>
