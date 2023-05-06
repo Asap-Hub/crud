@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Modal from "./Modal";
 import axios from "axios";
 import { base_api } from "../../Constant";
+import { Console } from "console";
 
 interface props{
     updateModal?:boolean
@@ -19,31 +20,38 @@ export default function Update({updateModal, data}:props){
     const[age, setAge] = useState<any>();
     const[active, setActive] = useState<any>(false);
 
-   const handleUpdate =(data:any) =>{ 
-    
-    let {id, firstName, lastName, age, active} = data;
+ 
+   const handleUpdate =(datas:any) =>{ 
 
-    localStorage.setItem('ID', id);
-    localStorage.setItem('FirstName', firstName);
-    localStorage.setItem('LastName', lastName);
-    localStorage.setItem('Age', age);
-    localStorage.setItem('Active', active);
+    for(let instance of datas){
+        
+        const {id, firstName, lastName, age, active}= instance;
+
+     var result =   localStorage.setItem('ID', id); 
+        localStorage.setItem('FirstName', firstName);
+        localStorage.setItem('LastName', lastName);
+        localStorage.setItem('Age', age);
+        localStorage.setItem('Active', active); 
+    }  
      
     }
 
-    useEffect(() =>{
-
-       
-        setUserId(localStorage.getItem('ID'))
-        setFirstName(localStorage.getItem('First Name'));
-        setSecondName(localStorage.getItem('LastName'));
+    useEffect(() =>{  
+        Object.keys(localStorage).forEach(function(key){
+        setUserId(localStorage.getItem(key)) 
+        setFirstName(localStorage.getItem('FirstName'));
+        setSecondName(localStorage.getItem(JSON.stringify('LastName')));
         setAge(localStorage.getItem('Age'));
-        setActive(localStorage.getItem('Active'))
-    },[handleUpdate(data)]);
+        setActive(localStorage.getItem('Active'));
+        })
 
-    console.log(handleUpdate );
+        
+    },[handleUpdate(data)]); 
  
+
     const updateData= () => {
+
+
         axios.put(`${base_api}reactCrud/${userId}`,{
             firstName,
             secondName,
